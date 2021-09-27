@@ -1,0 +1,1 @@
+game.snake_and_ladders.special_symbol_size=5
