@@ -1,18 +1,39 @@
 package dev.naman.models;
 
 public class SnakeCell extends Cell {
-    int finalPosition;
+    Position finalPosition;
 
     private SnakeCell(int cellPoition, int finalPosition) {
         this.position = new Position(cellPoition);
-        this.finalPosition = finalPosition;
+        this.finalPosition = new Position(finalPosition);
     }
 
-    public static class Builder {}
+    public Position getFinalPosition(){
+        return this.finalPosition ;
+    }
+
+    public static class Builder {
+        int cellPoition;
+        int finalPosition;
+
+        public Builder(){}
+
+        public Builder setHeadPosition(int headPosition){
+            this.cellPoition = headPosition;
+            return this;
+        }
+        public Builder setTailPosition(int finalPosition){
+            this.finalPosition = finalPosition;
+            return this;
+        }
+
+        public SnakeCell build(){
+            return new SnakeCell(cellPoition, finalPosition);
+        }
+    }
 }
 
 
-// TODO
 // CellFactory
 // CellFactory.createNormalCell().atPositon();
 // CellFactory.createCellWithSnake(). withFinalPosition()
