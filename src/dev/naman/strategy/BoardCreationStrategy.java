@@ -1,7 +1,8 @@
 package dev.naman.strategy;
 
-import dev.naman.models.Board;
+import java.util.ArrayList;
+import dev.naman.models.Cell;
 
 public interface BoardCreationStrategy {
-    Board createBoard();
+    ArrayList<Cell> createBoard(int boardSize);
 }

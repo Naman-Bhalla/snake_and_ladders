@@ -1,5 +1,43 @@
 package dev.naman.strategy;
 
-public class EqualSnakesAndLadders {
-    EqualSnakesAndLadders(int boardSize, int percent_count);
+import java.util.ArrayList;
+import dev.naman.models.Cell;
+
+public class EqualSnakesAndLadders implements BoardCreationStrategy {
+    int percentCount;
+    EqualSnakesAndLadders(int percentCount){
+        this.percentCount = percentCount;
+    }
+    
+    @Override
+    public ArrayList<Cell> createBoard(int boardSize) {
+        int snakeCount = (boardSize*this.percentCount)/100;
+        int ladderCount = (boardSize*this.percentCount)/100;
+        
+        ArrayList<Cell> cells = new ArrayList<>(boardSize);
+        for(int i=0;i<boardSize;i++){
+            cells.add(null);
+        }
+        CellFillingHelper.fillCellWithRandomSnakes(boardSize, snakeCount, cells);
+        CellFillingHelper.fillCellWithRandomLadders(boardSize, ladderCount, cells);
+        CellFillingHelper.fillNullCellWithNormal(cells);
+        
+        return cells;
+    }
+
+
+    public static class Builder {
+        int percentCount;
+        
+        public Builder(){}
+        
+        public Builder withPercent(int percentCount){
+            this.percentCount = percentCount;
+            return this;
+        }
+
+        public EqualSnakesAndLadders build(){
+            return new EqualSnakesAndLadders(this.percentCount);
+        }
+    }
 }
